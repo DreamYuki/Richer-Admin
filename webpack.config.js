@@ -38,6 +38,14 @@ module.exports = {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
       },
+      {
+        test: /\.less$/,
+        use: [
+          'style-loader', // 将 CSS 插入到 DOM 中
+          'css-loader',   // 处理 CSS 文件中的 `@import` 和 `url()`
+          'less-loader',  // 将 Less 转换为 CSS
+        ],
+      },
     ],
   },
   plugins: [

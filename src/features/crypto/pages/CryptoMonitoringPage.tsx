@@ -5,6 +5,8 @@ import DailyReturns from "../components/DailyReturns";
 import StrategyTable from "../components/StrategyTable";
 import RealTimePriceChart from "../components/RealTimePriceChart";
 import DailyProfitAndReturnCard from "../components/DailyProfitAndReturnCard";
+import StabilityEvaluationCard from "../components/StabilityEvaluationCard";
+import RecentOrdersCard from "../components/RecentOrdersCard";
 
 const CryptoMonitoringPage: React.FC = () => {
   // 日交易触发率、日命中率、总胜率、做空胜率、做多胜率、
@@ -24,9 +26,15 @@ const CryptoMonitoringPage: React.FC = () => {
           </div>
         </Col>
       </Row>
-      <Row gutter={[16, 16]} style={{ height: "240px", marginTop: "16px" }}>
-        <Col span={24} style={{ height: "100%" }}>
+      <Row gutter={[16, 16]} style={{ height: "440px", marginTop: "16px" }}>
+        <Col span={10} style={{ height: "100%" }}>
+          <RecentOrdersCard />
+        </Col>
+        <Col span={8} style={{ height: "100%" }}>
           <DailyReturns />
+        </Col>
+        <Col span={6} style={{ height: "100%" }}>
+          <StabilityEvaluationCard />
         </Col>
       </Row>
       <Row gutter={[16, 16]} style={{ marginTop: "16px" }}>

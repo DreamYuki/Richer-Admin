@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { Layout, Menu } from "antd";
 import { store } from "./store";
 import CryptoMonitoringPage from "./features/crypto/pages/CryptoMonitoringPage";
@@ -46,9 +46,9 @@ const App = () => {
               onClick={(e) => setSelectedMarket(e.key)}
             >
               <Menu.Item key="crypto">加密货币</Menu.Item>
-              <Menu.Item key="equities">美股正股</Menu.Item>
-              <Menu.Item key="futures">美股期货</Menu.Item>
-              <Menu.Item key="options">美股期权</Menu.Item>
+              <Menu.Item key="equities">美股 · 正股</Menu.Item>
+              <Menu.Item key="futures">美股 · 期货</Menu.Item>
+              <Menu.Item key="options">美股 · 期权</Menu.Item>
             </Menu>
           </Header>
           <Layout>

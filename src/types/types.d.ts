@@ -5,7 +5,7 @@ export interface CryptoData {
 }
 
 export type DailyReturnsData = {
-  week: string;
+  date: string;
   returns: number;
 };
 
@@ -45,4 +45,17 @@ export interface BinanceDataState {
   initialFunds: number;
   accountBalance: Balance[];
   klineData: KlineDataObj[];
+  orders: Order[];
+}
+
+export interface Order {
+  key: string;
+  direction: string;
+  type: string;
+  status: string;
+  profit: boolean;
+  strategyName: string;
+  profitLoss: number;
+  roi: string;
+  updateTime: string;
 }

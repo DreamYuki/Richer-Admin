@@ -98,15 +98,21 @@ const RealTimePriceChart: React.FC<RealTimePriceChartProps> = ({ style }) => {
   };
 
   const volumeConfig = {
-    data: klineData.map((item) => ({
-      date: new Date(item.openTime),
-      volume: parseFloat(item.volume),
-    })),
+    data: klineData.map((item) => {
+      const isRising = parseFloat(item.closePrice) >= parseFloat(item.openPrice);
+      return {
+        date: new Date(item.openTime),
+        volume: parseFloat(item.volume),
+        color: isRising ? "#26a69a" : "#ef5350", // 设置颜色，根据涨跌改变
+      };
+    }),
+    legend: false, // 移除图例
     xField: "date",
     yField: "volume",
-    color: "#8884d8",
+    colorField: "color",
     tooltip: {
-      showMarkers: true,
+      title: 'date', // 使用字段 'date' 作为 tooltip 标题
+      items: [{ channel: 'y' }], // 配置 y 轴数据作为 tooltip 项
     },
     axis: {
       x: { label: null },

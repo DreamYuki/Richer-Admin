@@ -7,40 +7,50 @@ import { updateInitialFunds } from "../../../store/binanceData";
 
 const { Title, Text } = Typography;
 
+function formatDateToUTC3(date: Date ) {
+  const offset = 3; // UTC+3 时区
+  const utcDate = new Date(date.getTime() + offset * 60 * 60 * 1000); // 加上时区偏移
+  return utcDate.toISOString().split('T')[0]; // 格式化为 YYYY-MM-DD
+}
 const DailyProfitAndReturnCard: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const initialFunds = useSelector((state: RootState) => state.binanceData?.initialFunds ?? 0);
   const dailyReturnRate = useSelector((state: RootState) => {
     const accountBalance = state.binanceData?.accountBalance;
     if (!accountBalance || accountBalance.length === 0) return 0; // 确保有数据
-  
+
     const lastEntry = accountBalance[accountBalance.length - 1];
     if (initialFunds && lastEntry?.allIncome !== undefined) {
-      return 100* parseFloat(lastEntry?.allIncome) / initialFunds;
+      return (100 * parseFloat(lastEntry?.allIncome)) / initialFunds;
     }
     return 0; // 默认返回值，避免 NaN
   });
   const dailyProfit = useSelector((state: RootState) => {
     const accountBalance = state.binanceData?.accountBalance;
     if (!accountBalance || accountBalance.length === 0) return 0; // 确保有数据
-  
+
     const lastEntry = accountBalance[accountBalance.length - 1];
     if (initialFunds && lastEntry?.allIncome !== undefined) {
       return parseFloat(lastEntry?.allIncome);
     }
-    
-    return 0
+
+    return 0;
   });
 
   useEffect(() => {
     socket.on("updateInitialFunds", (data: number) => {
       dispatch(updateInitialFunds(data));
     });
-  }, [dispatch])
+  }, [dispatch]);
 
   return (
     <Card
-      title="今日盈亏收益"
+      title={
+        <div>
+          今日盈亏收益
+          <span style={{ fontSize: "12px", color: "#888", marginLeft: "8px" }}>（{formatDateToUTC3(new Date())}）</span>
+        </div>
+      }
       style={{
         height: "100%",
         boxSizing: "border-box", // 确保内边距不增加组件的高度

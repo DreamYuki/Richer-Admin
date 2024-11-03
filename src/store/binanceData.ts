@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Balance, BinanceDataState, KlineDataObj } from "../types/types";
+import { Balance, BinanceDataState, KlineDataObj, Order } from "../types/types";
 
 const initialState: BinanceDataState = {
   initialFunds: 0,
   accountBalance: [],
   klineData: [],
+  orders: [],
 };
 
 const binanceDataSlice = createSlice({
@@ -30,8 +31,11 @@ const binanceDataSlice = createSlice({
     setKlineData: (state, action: PayloadAction<KlineDataObj[]>) => {
       state.klineData = action.payload;
     },
+    setOrders: (state, action: PayloadAction<Order[]>) => {
+      state.orders = action.payload;
+    },
   },
 });
 
-export const { initialBalanceData, updateBalanceData, updateInitialFunds, updateKlineData, setKlineData } = binanceDataSlice.actions;
+export const { initialBalanceData, updateBalanceData, updateInitialFunds, updateKlineData, setKlineData, setOrders } = binanceDataSlice.actions;
 export default binanceDataSlice.reducer;

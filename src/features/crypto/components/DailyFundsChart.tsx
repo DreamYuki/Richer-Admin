@@ -61,11 +61,16 @@ const DailyFundsChart: React.FC<DailyFundsChartProps> = ({ style }) => {
   };
 
   // Memoized Line chart component
-  const MemoizedLineChart = React.memo(() => <Line {...lineConfig} style={{ height: "100%", display: "flex" }}/>);
+  const MemoizedLineChart = React.memo(() => <Line {...lineConfig} style={{ height: "100%", display: "flex" }} />);
 
   return (
     <Card
-      title="今日资金走势"
+      title={
+        <div>
+          今日资金走势
+          <span style={{ fontSize: "12px", color: "#888", marginLeft: "8px" }}>（每日5:00结算）</span>
+        </div>
+      }
       ref={containerRef}
       style={{
         height: "100%",
