@@ -8,7 +8,6 @@ import useResizeCanvas from "../../../hooks/useResizeCanvas";
 const WeeklyReturns: React.FC = () => {
   const [weeklyReturns, setWeeklyReturns] = useState<WeeklyReturnsData[]>([]);
   const { containerRef, canvasSize } = useResizeCanvas(10, 24, 48); // 传入左右和上下的 padding 以及 title 高度
-  console.log(canvasSize);
 
   useEffect(() => {
     // 监听 WebSocket 事件并更新状态

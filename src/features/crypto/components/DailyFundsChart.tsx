@@ -2,24 +2,38 @@ import React, { useEffect, useRef, useState } from "react";
 import { Card } from "antd";
 import { Line } from "@ant-design/plots";
 import { useSelector, useDispatch } from "react-redux";
-import { Balance, updateBalanceData } from "../../../store/binanceData";
-import { RootState } from "../../../store";
+import { initialBalanceData, updateBalanceData } from "../../../store/binanceData";
+import { AppDispatch, RootState } from "../../../store";
 import socket from "../../../utils/socket";
 import useResizeCanvas from "../../../hooks/useResizeCanvas";
+import { Balance } from "../../../types/types";
+import { throttle } from "../../../utils/throttle";
 
 interface DailyFundsChartProps {
   style?: React.CSSProperties; // 添加 style 属性到组件的 props
 }
 
 const DailyFundsChart: React.FC<DailyFundsChartProps> = ({ style }) => {
-  const dispatch = useDispatch();
-  const balanceData = useSelector((state: RootState) => state.binanceData?.accountBalance ?? []);
+  const dispatch: AppDispatch = useDispatch();
+  const balanceData = useSelector(
+    (state: RootState) => state.binanceData?.accountBalance ?? [],
+    (prev, next) => prev.length === next.length && prev[prev.length - 1] === next[next.length - 1]
+  );
   const { containerRef, canvasSize } = useResizeCanvas(10, 24, 48); // 传入左右和上下的 padding 以及 title 高度
-  
+
   useEffect(() => {
-    socket.on("accountBalance", (data: Balance) => {
-      dispatch(updateBalanceData(data));
+    socket.on("requestInitialBalance", (data: Balance[]) => {
+      dispatch(initialBalanceData(data));
     });
+    socket.emit("requestData", { eventType: "requestInitialBalance", payload: {} });
+  }, []);
+
+  useEffect(() => {
+    const throttledUpdateBalanceData = throttle((data: Balance) => {
+      dispatch(updateBalanceData(data));
+    }, 1000); // 每秒最多更新一次
+
+    socket.on("accountBalance", throttledUpdateBalanceData);
 
     return () => {
       socket.off("accountBalance");
@@ -28,17 +42,26 @@ const DailyFundsChart: React.FC<DailyFundsChartProps> = ({ style }) => {
 
   const lineConfig = {
     data: balanceData.map((item) => ({
-      date: new Date(item.updateTime).toLocaleDateString(),
-      value: item.availableBalance,
+      date: new Date(parseFloat(item.updateTime)),
+      value: parseFloat(item.availableBalance),
     })),
     xField: "date",
     yField: "value",
-    smooth: true,
-    title: { visible: true, text: "今日资金走势" },
+    interaction: {
+      tooltip: {
+        marker: false,
+      },
+    },
+    style: {
+      lineWidth: 2,
+    },
     autoFit: false, // 禁用自动适应以防止默认高度问题
     width: canvasSize.width, // 使用 Hook 返回的动态宽度
     height: canvasSize.height, // 使用 Hook 返回的动态高度
   };
+
+  // Memoized Line chart component
+  const MemoizedLineChart = React.memo(() => <Line {...lineConfig} style={{ height: "100%", display: "flex" }}/>);
 
   return (
     <Card
@@ -55,7 +78,7 @@ const DailyFundsChart: React.FC<DailyFundsChartProps> = ({ style }) => {
         },
       }}
     >
-      <Line {...lineConfig} style={{ height: "100%", display: "flex" }} />
+      <MemoizedLineChart />
     </Card>
   );
 };

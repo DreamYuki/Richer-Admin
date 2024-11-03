@@ -11,11 +11,11 @@ const CryptoMonitoringPage: React.FC = () => {
   // TODO 雷达图：各个策略胜率雷达图
   return (
     <div style={{ padding: "20px" }}>
-      <Row gutter={[16, 16]} style={{ height: "400px" }}>
-        <Col span={16} style={{ height: "100%" }}>
+      <Row gutter={[16, 16]} style={{ height: "500px" }}>
+        <Col span={14} style={{ height: "100%" }}>
           <RealTimePriceChart style={{ height: "100%" }} />
         </Col>
-        <Col span={8} style={{ height: "100%", display: "flex", flexDirection: "column", gap: "16px" }}>
+        <Col span={10} style={{ height: "100%", display: "flex", flexDirection: "column", gap: "16px" }}>
           <div style={{ flex: "0 0 35%", overflow: "hidden" }}>
             <DailyProfitAndReturnCard />
           </div>

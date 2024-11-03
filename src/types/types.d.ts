@@ -31,3 +31,18 @@ export interface BollingerBand {
   middleBand: number; // 中轨 (SMA)
   lowerBand: number; // 下轨
 }
+
+export interface Balance {
+  id: number
+  availableBalance: string;
+  allTransfer: string;
+  allIncome: string;
+  isolatedWallet: string;
+  updateTime: string;
+}
+
+export interface BinanceDataState {
+  initialFunds: number;
+  accountBalance: Balance[];
+  klineData: KlineDataObj[];
+}

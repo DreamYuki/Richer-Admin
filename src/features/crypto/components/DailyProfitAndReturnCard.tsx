@@ -1,29 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Typography } from "antd";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../store";
+import socket from "../../../utils/socket";
+import { updateInitialFunds } from "../../../store/binanceData";
 
 const { Title, Text } = Typography;
 
 const DailyProfitAndReturnCard: React.FC = () => {
-  // 从 Redux store 获取数据
-  const dailyProfit = useSelector((state: RootState) => state.binanceData?.accountBalance?.[state.binanceData?.accountBalance?.length].allIncome ?? 0);
+  const dispatch: AppDispatch = useDispatch();
+  const initialFunds = useSelector((state: RootState) => state.binanceData?.initialFunds ?? 0);
   const dailyReturnRate = useSelector((state: RootState) => {
     const accountBalance = state.binanceData?.accountBalance;
     if (!accountBalance || accountBalance.length === 0) return 0; // 确保有数据
   
     const lastEntry = accountBalance[accountBalance.length - 1];
-    const { allIncome, initialFunds } = lastEntry;
-  
-    // 确保 initialFunds 不为 0，并且 allIncome 存在
-    if (initialFunds && allIncome !== undefined) {
-      return allIncome / initialFunds;
+    if (initialFunds && lastEntry?.allIncome !== undefined) {
+      return 100* parseFloat(lastEntry?.allIncome) / initialFunds;
     }
-  
     return 0; // 默认返回值，避免 NaN
   });
-  console.log(dailyReturnRate);
+  const dailyProfit = useSelector((state: RootState) => {
+    const accountBalance = state.binanceData?.accountBalance;
+    if (!accountBalance || accountBalance.length === 0) return 0; // 确保有数据
   
+    const lastEntry = accountBalance[accountBalance.length - 1];
+    if (initialFunds && lastEntry?.allIncome !== undefined) {
+      return parseFloat(lastEntry?.allIncome);
+    }
+    
+    return 0
+  });
+
+  useEffect(() => {
+    socket.on("updateInitialFunds", (data: number) => {
+      dispatch(updateInitialFunds(data));
+    });
+  }, [dispatch])
 
   return (
     <Card
