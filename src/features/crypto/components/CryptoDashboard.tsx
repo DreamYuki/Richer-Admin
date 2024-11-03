@@ -1,6 +1,6 @@
 import React from "react";
 import StrategyTable from "./StrategyTable";
-import WeeklyReturns from "./WeeklyReturns";
+import WeeklyReturns from "./DailyReturns";
 import { Row, Col } from "antd";
 
 const CryptoDashboard: React.FC = () => {
@@ -8,8 +8,7 @@ const CryptoDashboard: React.FC = () => {
     <div style={{ padding: "20px" }}>
       <Row gutter={[16, 16]}>
         {/* Daily Performance Component */}
-        <Col span={24}>
-        </Col>
+        <Col span={24}></Col>
 
         {/* Weekly Returns Component */}
         <Col span={24}>

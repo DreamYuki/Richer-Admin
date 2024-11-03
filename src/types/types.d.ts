@@ -4,7 +4,7 @@ export interface CryptoData {
   price: number;
 }
 
-export type WeeklyReturnsData = {
+export type DailyReturnsData = {
   week: string;
   returns: number;
 };

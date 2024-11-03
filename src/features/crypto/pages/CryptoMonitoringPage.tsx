@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from "antd";
 import DailyFundsChart from "../components/DailyFundsChart";
-import WeeklyReturnCard from "../components/WeeklyReturns";
+import DailyReturns from "../components/DailyReturns";
 import StrategyTable from "../components/StrategyTable";
 import RealTimePriceChart from "../components/RealTimePriceChart";
 import DailyProfitAndReturnCard from "../components/DailyProfitAndReturnCard";
@@ -20,13 +20,13 @@ const CryptoMonitoringPage: React.FC = () => {
             <DailyProfitAndReturnCard />
           </div>
           <div style={{ flex: "1 1 65%", overflow: "hidden" }}>
-            <DailyFundsChart style={{ height: "100%" }}/>
+            <DailyFundsChart style={{ height: "100%" }} />
           </div>
         </Col>
       </Row>
       <Row gutter={[16, 16]} style={{ height: "240px", marginTop: "16px" }}>
         <Col span={24} style={{ height: "100%" }}>
-          <WeeklyReturnCard />
+          <DailyReturns />
         </Col>
       </Row>
       <Row gutter={[16, 16]} style={{ marginTop: "16px" }}>

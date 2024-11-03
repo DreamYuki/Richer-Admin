@@ -13,6 +13,7 @@ module.exports = {
     static: './dist',
     hot: true,
     port: 3000,
+    historyApiFallback: true,
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
