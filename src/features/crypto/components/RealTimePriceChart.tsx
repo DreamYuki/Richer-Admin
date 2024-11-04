@@ -4,6 +4,9 @@ import { Column, Stock } from "@ant-design/plots";
 import socket from "../../../utils/socket";
 import useResizeCanvas from "../../../hooks/useResizeCanvas";
 import { KlineDataObj } from "../../../types/types";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../store";
+import { setKlineData } from "../../../store/binanceData";
 
 interface RealTimePriceChartProps {
   style?: React.CSSProperties;
@@ -12,20 +15,20 @@ interface RealTimePriceChartProps {
 const CHART_MAP: { [key: string]: any } = {};
 
 const RealTimePriceChart: React.FC<RealTimePriceChartProps> = ({ style }) => {
-  const [klineData, setKlineData] = useState<KlineDataObj[]>([]);
+  const dispatch = useDispatch()
+  const klineData = useSelector((state: RootState) => state.binanceData.klineData)
   const dataRef = useRef<KlineDataObj[]>([]);
   const { containerRef, canvasSize } = useResizeCanvas(10, 24, 48);
 
   useEffect(() => {
     // 监听后端的 K 线数据更新
     socket.on("klineUpdate", (data: KlineDataObj[]) => {
-      setKlineData(data);
+      dispatch(setKlineData(data))
     });
-
     return () => {
       socket.off("klineUpdate");
     };
-  }, []);
+  }, [dispatch]);
 
   // 静态的买卖打点数据
   const mockTradePoints = [
@@ -124,7 +127,12 @@ const RealTimePriceChart: React.FC<RealTimePriceChartProps> = ({ style }) => {
 
   return (
     <Card
-      title="实时价格走势图"
+      title={
+        <div>
+          实时价格走势图
+          <span style={{ fontSize: "12px", color: "#888", marginLeft: "8px" }}>（BTC/USDT）</span>
+        </div>
+      }
       ref={containerRef}
       style={{
         height: "100%",

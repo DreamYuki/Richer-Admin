@@ -7,31 +7,27 @@ const StabilityEvaluationCard: React.FC = () => {
   const { containerRef, canvasSize } = useResizeCanvas(10, 24, 48);
 
   useEffect(() => {
-    // 当 canvasSize 改变时触发重新渲染或更新图表宽高
-    // 如果图表引用支持 ref，可通过 ref.current.update() 调用刷新图表
-    console.log(canvasSize.width);
-    console.log(canvasSize.height);
   }, [canvasSize]);
 
   const data = [
-    { item: "Hit Rate", type: "real", score: 40 }, // 日命中率
-    { item: "Hit Rate", type: "mock", score: 60.36 }, // 日命中率
-    { item: "Trigger Rate", type: "real", score: 75 }, // 触发成功率
-    { item: "Trigger Rate", type: "mock", score: 70 }, // 触发成功率
-    { item: "Win Rate", type: "real", score: 80 }, // 总胜率
-    { item: "Win Rate", type: "mock", score: 78 }, // 总胜率
-    { item: "Long Win", type: "real", score: 68 }, // 做多胜率
-    { item: "Long Win", type: "mock", score: 66 }, // 做多胜率
-    { item: "Short Win", type: "real", score: 65 }, // 做空胜率
-    { item: "Short Win", type: "mock", score: 63 }, // 做空胜率
-    { item: "Net Rel.", type: "real", score: 85 }, // 网络可靠度
-    { item: "Net Rel.", type: "mock", score: 82 }, // 网络可靠度
-    { item: "Avg Yield", type: "real", score: 72 }, // 平均每个周期收益率
-    { item: "Avg Yield", type: "mock", score: 68 }, // 平均每个周期收益率
-    { item: "Stop Loss", type: "real", score: 88 }, // 强平止损拦截率
-    { item: "Stop Loss", type: "mock", score: 95 }, // 强平止损拦截率
-    { item: "No Timeout", type: "real", score: 56 }, // 未超时平仓率
-    { item: "No Timeout", type: "mock", score: 44 }, // 未超时平仓率
+    { item: "日命中率", type: "实盘", score: 40 },
+    { item: "日命中率", type: "回测", score: 60.36 },
+    { item: "触发成功率", type: "实盘", score: 75 },
+    { item: "触发成功率", type: "回测", score: 70 },
+    { item: "总胜率", type: "实盘", score: 80 },
+    { item: "总胜率", type: "回测", score: 78 },
+    { item: "做多胜率", type: "实盘", score: 68 },
+    { item: "做多胜率", type: "回测", score: 66 },
+    { item: "做空胜率", type: "实盘", score: 65 },
+    { item: "做空胜率", type: "回测", score: 63 },
+    { item: "网络可靠度", type: "实盘", score: 85 },
+    { item: "网络可靠度", type: "回测", score: 82 },
+    { item: "周期收益率", type: "实盘", score: 72 },
+    { item: "周期收益率", type: "回测", score: 68 },
+    { item: "强平拦截率", type: "实盘", score: 88 },
+    { item: "强平拦截率", type: "回测", score: 95 },
+    { item: "按时平仓率", type: "实盘", score: 56 },
+    { item: "按时平仓率", type: "回测", score: 44 },
   ];
 
   const radarConfig = {
@@ -59,7 +55,12 @@ const StabilityEvaluationCard: React.FC = () => {
 
   return (
     <Card
-      title="稳定性评估"
+      title={
+        <div>
+          稳定性评估
+          <span style={{ fontSize: "12px", color: "#888", marginLeft: "8px" }}>（近30日数据）</span>
+        </div>
+      }
       ref={containerRef}
       style={{
         height: "100%",

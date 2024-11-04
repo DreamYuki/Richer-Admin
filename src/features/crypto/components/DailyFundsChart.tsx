@@ -41,9 +41,9 @@ const DailyFundsChart: React.FC<DailyFundsChartProps> = ({ style }) => {
   }, [dispatch]);
 
   const lineConfig = {
-    data: balanceData.map((item) => ({
-      date: new Date(parseFloat(item.updateTime)),
-      value: parseFloat(item.availableBalance),
+    data: balanceData?.map((item) => ({
+      date: new Date(parseFloat(item?.updateTime)),
+      value: parseFloat(item?.availableBalance) + parseFloat(item?.isolatedWallet),
     })),
     xField: "date",
     yField: "value",

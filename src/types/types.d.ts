@@ -33,7 +33,7 @@ export interface BollingerBand {
 }
 
 export interface Balance {
-  id: number
+  id: number;
   availableBalance: string;
   allTransfer: string;
   allIncome: string;
@@ -46,6 +46,7 @@ export interface BinanceDataState {
   accountBalance: Balance[];
   klineData: KlineDataObj[];
   orders: Order[];
+  dailyReturns: DailyReturnsData[];
 }
 
 export interface Order {

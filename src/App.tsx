@@ -7,12 +7,7 @@ import CryptoMonitoringPage from "./features/crypto/pages/CryptoMonitoringPage";
 import EquitiesMonitoringPage from "./features/equities/pages/EquitiesMonitoringPage";
 import FuturesMonitoringPage from "./features/futures/pages/FuturesMonitoringPage";
 import OptionsMonitoringPage from "./features/options/pages/OptionsMonitoringPage";
-import {
-  CryptoSideMenu,
-  EquitiesSideMenu,
-  FuturesSideMenu,
-  OptionsSideMenu,
-} from "./components/SideMenus";
+import { CryptoSideMenu, EquitiesSideMenu, FuturesSideMenu, OptionsSideMenu } from "./components/SideMenus";
 
 const { Header, Sider, Content } = Layout;
 
@@ -44,12 +39,13 @@ const App = () => {
               mode="horizontal"
               defaultSelectedKeys={["crypto"]}
               onClick={(e) => setSelectedMarket(e.key)}
-            >
-              <Menu.Item key="crypto">加密货币</Menu.Item>
-              <Menu.Item key="equities">美股 · 正股</Menu.Item>
-              <Menu.Item key="futures">美股 · 期货</Menu.Item>
-              <Menu.Item key="options">美股 · 期权</Menu.Item>
-            </Menu>
+              items={[
+                { key: "crypto", label: "加密货币" },
+                { key: "equities", label: "美股 · 正股" },
+                { key: "futures", label: "美股 · 期货" },
+                { key: "options", label: "美股 · 期权" },
+              ]}
+            />
           </Header>
           <Layout>
             <Sider width={200} className="site-layout-background">

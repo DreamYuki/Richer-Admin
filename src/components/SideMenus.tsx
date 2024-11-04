@@ -1,7 +1,12 @@
-// components/SideMenus.tsx
 import React from "react";
 import { Menu } from "antd";
 import { useNavigate } from "react-router-dom";
+
+const createMenuItems = (basePath: string) => [
+  { key: `${basePath}/monitoring`, label: "实盘交易监控" },
+  { key: `${basePath}/backtesting`, label: "回测交易" },
+  { key: `${basePath}/orders`, label: "实盘订单记录" },
+];
 
 export const CryptoSideMenu: React.FC = () => {
   const navigate = useNavigate();
@@ -11,11 +16,8 @@ export const CryptoSideMenu: React.FC = () => {
       defaultSelectedKeys={["/crypto/monitoring"]}
       style={{ height: "100%" }}
       onClick={({ key }) => navigate(key)}
-    >
-      <Menu.Item key="/crypto/monitoring">实盘交易监控</Menu.Item>
-      <Menu.Item key="/crypto/backtesting">回测交易</Menu.Item>
-      <Menu.Item key="/crypto/orders">实盘订单记录</Menu.Item>
-    </Menu>
+      items={createMenuItems("/crypto")}
+    />
   );
 };
 
@@ -27,11 +29,8 @@ export const EquitiesSideMenu: React.FC = () => {
       defaultSelectedKeys={["/equities/monitoring"]}
       style={{ height: "100%" }}
       onClick={({ key }) => navigate(key)}
-    >
-      <Menu.Item key="/equities/monitoring">实盘交易监控</Menu.Item>
-      <Menu.Item key="/equities/backtesting">回测交易</Menu.Item>
-      <Menu.Item key="/equities/orders">实盘订单记录</Menu.Item>
-    </Menu>
+      items={createMenuItems("/equities")}
+    />
   );
 };
 
@@ -43,11 +42,8 @@ export const FuturesSideMenu: React.FC = () => {
       defaultSelectedKeys={["/futures/monitoring"]}
       style={{ height: "100%" }}
       onClick={({ key }) => navigate(key)}
-    >
-      <Menu.Item key="/futures/monitoring">实盘交易监控</Menu.Item>
-      <Menu.Item key="/futures/backtesting">回测交易</Menu.Item>
-      <Menu.Item key="/futures/orders">实盘订单记录</Menu.Item>
-    </Menu>
+      items={createMenuItems("/futures")}
+    />
   );
 };
 
@@ -59,10 +55,7 @@ export const OptionsSideMenu: React.FC = () => {
       defaultSelectedKeys={["/options/monitoring"]}
       style={{ height: "100%" }}
       onClick={({ key }) => navigate(key)}
-    >
-      <Menu.Item key="/options/monitoring">实盘交易监控</Menu.Item>
-      <Menu.Item key="/options/backtesting">回测交易</Menu.Item>
-      <Menu.Item key="/options/orders">实盘订单记录</Menu.Item>
-    </Menu>
+      items={createMenuItems("/options")}
+    />
   );
 };

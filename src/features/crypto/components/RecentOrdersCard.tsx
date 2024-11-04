@@ -6,6 +6,7 @@ import { RootState } from "../../../store";
 import { Order } from "../../../types/types";
 import { setOrders } from "../../../store/binanceData";
 import socket from "../../../utils/socket";
+import useResizeCanvas from "../../../hooks/useResizeCanvas";
 
 export enum OrderStatus {
   NEW = "NEW", //新建订单
@@ -19,9 +20,8 @@ export enum OrderStatus {
 const RecentOrdersCard: React.FC = () => {
   const dispatch = useDispatch();
   const recentOrders = useSelector((state: RootState) => state.binanceData.orders);
+  const { containerRef, canvasSize } = useResizeCanvas(10, 10, 48);
   const handleOrdersUpdate = (orders: Order[]) => {
-    console.log(orders);
-    
     dispatch(setOrders(orders));
   };
   useEffect(() => {
@@ -77,12 +77,15 @@ const RecentOrdersCard: React.FC = () => {
             label = "已拒绝";
             break;
           case OrderStatus.FILLED:
-            if (record.type === "平仓") {
+            if (record.type === "CLOSE") {
               color = record.profit ? "success" : "error";
               label = record.profit ? "已盈利" : "已亏损";
+            } else if (record.type === "FORCECLOSE") {
+              color = "error";
+              label = "爆仓";
             } else {
-              color = "default";
-              label = "已完成";
+              color = "success";
+              label = "完全成交";
             }
             break;
           case OrderStatus.PARTIALLY_FILLED:
@@ -111,15 +114,15 @@ const RecentOrdersCard: React.FC = () => {
       dataIndex: "profitLoss",
       key: "profitLoss",
       render: (profitLoss: number, record: any) => {
-        if (record.type !== "CLOSE") {
+        if (record.type !== "CLOSE" && record.type !== "FORCECLOSE") {
           return <span>—</span>; // 非平仓订单不显示收益
         }
         const color = profitLoss >= 0 ? "green" : "red";
         return (
           <div>
-            <span style={{ color }}>{profitLoss >= 0 ? `+${profitLoss.toFixed(5)} USD` : `${profitLoss.toFixed(5)} USD`}</span>
+            <span style={{ color }}>{profitLoss >= 0 ? `+${profitLoss.toFixed(5)} USDT` : `${profitLoss.toFixed(5)} USDT`}</span>
             <br />
-            <span style={{ color }}>{parseFloat(record.roi) >= 0 ? `+${record.roi}` : `${record.roi}`}</span>
+            <span style={{ color }}>{record.roi}</span>
           </div>
         );
       },
@@ -147,13 +150,22 @@ const RecentOrdersCard: React.FC = () => {
     },
   ];
   return (
-    <Card title="最近订单" style={{ height: "100%" }}>
+    <Card
+      title={
+        <div>
+          最近订单
+          <span style={{ fontSize: "12px", color: "#888", marginLeft: "8px" }}>（近7日订单）</span>
+        </div>
+      }
+      ref={containerRef}
+      style={{ height: "100%" }}
+    >
       <Table
         dataSource={recentOrders}
         columns={columns}
         pagination={false}
         size="small"
-        scroll={{ y: 240 }} // 控制表格高度
+        scroll={{ y: canvasSize.height * 0.8 }} // 控制表格高度
       />
     </Card>
   );
