@@ -44,6 +44,7 @@ export interface Balance {
 export interface BinanceDataState {
   initialFunds: number;
   accountBalance: Balance[];
+  positionRisk: PositionRisk;
   klineData: KlineDataObj[];
   orders: Order[];
   dailyReturns: DailyReturnsData[];
@@ -59,4 +60,23 @@ export interface Order {
   profitLoss: number;
   roi: string;
   updateTime: string;
+}
+
+export interface PositionRisk {
+  symbol: string; // 交易对
+  positionAmt: string; // 头寸数量，符号代表多空方向，正数为多，负数为空
+  entryPrice: string; // 开仓均价
+  breakEvenPrice: string; // 盈亏平衡价
+  markPrice: string; // 当前标记价格
+  unRealizedProfit: string; // 持仓未实现盈亏
+  liquidationPrice: string; // 参考强平价格
+  leverage: string; // 当前杠杆倍数
+  maxNotionalValue: string; // 当前杠杆倍数允许的名义价值上限
+  marginType: 'cross' | 'isolated'; // 逐仓模式或全仓模式
+  isolatedMargin: string; // 逐仓保证金
+  isAutoAddMargin: string; // 是否自动添加保证金
+  positionSide: 'LONG' | 'SHORT' | 'BOTH'; // 持仓方向
+  notional: string; // 持仓名义价值
+  isolatedWallet: string; // 逐仓钱包余额
+  updateTime: number; // 更新时间（时间戳）
 }

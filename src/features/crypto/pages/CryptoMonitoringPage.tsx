@@ -18,10 +18,10 @@ const CryptoMonitoringPage: React.FC = () => {
           <RealTimePriceChart style={{ height: "100%" }} />
         </Col>
         <Col span={10} style={{ height: "100%", display: "flex", flexDirection: "column", gap: "16px" }}>
-          <div style={{ flex: "0 0 35%", overflow: "hidden" }}>
+          <div style={{ flex: "0 0 45%", overflow: "hidden" }}>
             <DailyProfitAndReturnCard />
           </div>
-          <div style={{ flex: "1 1 65%", overflow: "hidden" }}>
+          <div style={{ flex: "1 1 55%", overflow: "hidden" }}>
             <DailyFundsChart style={{ height: "100%" }} />
           </div>
         </Col>

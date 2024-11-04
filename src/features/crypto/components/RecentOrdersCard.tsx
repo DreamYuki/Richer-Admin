@@ -7,6 +7,7 @@ import { Order } from "../../../types/types";
 import { setOrders } from "../../../store/binanceData";
 import socket from "../../../utils/socket";
 import useResizeCanvas from "../../../hooks/useResizeCanvas";
+import { render } from "react-dom";
 
 export enum OrderStatus {
   NEW = "NEW", //新建订单
@@ -81,8 +82,8 @@ const RecentOrdersCard: React.FC = () => {
               color = record.profit ? "success" : "error";
               label = record.profit ? "已盈利" : "已亏损";
             } else if (record.type === "FORCECLOSE") {
-              color = "error";
-              label = "爆仓";
+              color = "#f50";
+              label = "爆仓！";
             } else {
               color = "success";
               label = "完全成交";
@@ -108,6 +109,7 @@ const RecentOrdersCard: React.FC = () => {
       title: "策略名称",
       dataIndex: "strategyName",
       key: "strategyName",
+      render: (strategyName: string, record: any) => (strategyName === "unkown" ? (record.type === "OPEN" ? "手动交易" : strategyName) : strategyName),
     },
     {
       title: "收益",

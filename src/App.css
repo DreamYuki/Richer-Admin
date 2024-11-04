@@ -1,1 +1,14 @@
 /* App-level styles */
+* {
+  user-select: none;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE/Edge */
+  -moz-user-select: none; /* Firefox */
+  touch-action: none; /* 防止触摸屏上的长按行为 */
+}
+
+.custom-trigger {
+  color: #fff; /* 确保与侧边栏颜色一致 */
+  font-size: 16px;
+  cursor: pointer;
+}

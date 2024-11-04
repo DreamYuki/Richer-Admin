@@ -13,6 +13,7 @@ const { Header, Sider, Content } = Layout;
 
 const App = () => {
   const [selectedMarket, setSelectedMarket] = useState("crypto");
+  const [collapsed, setCollapsed] = useState(false); // 用于控制侧边栏的折叠状态
 
   const renderSideMenu = () => {
     switch (selectedMarket) {
@@ -48,7 +49,15 @@ const App = () => {
             />
           </Header>
           <Layout>
-            <Sider width={200} className="site-layout-background">
+            <Sider
+              collapsible
+              collapsed={collapsed}
+              onCollapse={(value) => setCollapsed(value)} // 切换折叠状态
+              width={200}
+              collapsedWidth={40} // 折叠后的宽度
+              className="site-layout-background"
+              trigger={null} // 去掉默认的触发按钮以自定义按钮
+            >
               {renderSideMenu()}
             </Sider>
             <Layout style={{ padding: "24px" }}>
@@ -71,6 +80,23 @@ const App = () => {
               </Content>
             </Layout>
           </Layout>
+          {/* 固定在视口左下角的折叠按钮 */}
+          <div
+            onClick={() => setCollapsed(!collapsed)}
+            style={{
+              position: "fixed",
+              bottom: 16,
+              left: 16,
+              color: "#333", // 灰黑色字体
+              cursor: "pointer",
+              padding: "8px 12px",
+              backgroundColor: "transparent", // 透明背景色
+              borderRadius: "4px",
+              boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)", // 较轻的阴影效果
+            }}
+          >
+            {collapsed ? ">" : "<"} {/* 自定义按钮的内容 */}
+          </div>
         </Layout>
       </Router>
     </Provider>

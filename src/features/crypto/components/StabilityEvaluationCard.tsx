@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Card } from "antd";
 import { Radar } from "@ant-design/plots";
 import useResizeCanvas from "../../../hooks/useResizeCanvas";
 
 const StabilityEvaluationCard: React.FC = () => {
+  const [chartKey, setChartKey] = useState(0);
   const { containerRef, canvasSize } = useResizeCanvas(10, 24, 48);
-
   useEffect(() => {
+    // 强制重新渲染雷达图，否则会错位
+    setChartKey((prevKey: number) => prevKey + 1);
   }, [canvasSize]);
 
   const data = [
@@ -47,10 +49,8 @@ const StabilityEvaluationCard: React.FC = () => {
       lineWidth: 2,
     },
     autoFit: true,
-    // width: canvasSize.width,
-    // height: canvasSize.height,
-    width: 500,
-    height: 380,
+    width: canvasSize.width,
+    height: canvasSize.height,
   };
 
   return (
@@ -74,7 +74,7 @@ const StabilityEvaluationCard: React.FC = () => {
       }}
     >
       <div style={{ display: "block", textAlign: "center" }}>
-        <Radar {...radarConfig} />
+        <Radar key={chartKey} {...radarConfig} />
       </div>
     </Card>
   );
