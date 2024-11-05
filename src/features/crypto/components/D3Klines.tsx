@@ -1,25 +1,57 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Card } from "antd";
-import PropTypes from "prop-types";
-import { ChartCanvas, Chart } from "react-stockcharts";
-import { CandlestickSeries, BollingerSeries, BarSeries, LineSeries } from "react-stockcharts/lib/series";
-import { XAxis, YAxis } from "react-stockcharts/lib/axes";
-import { MouseCoordinateX, MouseCoordinateY, CrossHairCursor, CurrentCoordinate } from "react-stockcharts/lib/coordinates";
-import { OHLCTooltip, MovingAverageTooltip, BollingerBandTooltip } from "react-stockcharts/lib/tooltip";
-import { discontinuousTimeScaleProvider } from "react-stockcharts/lib/scale";
-import { ema, sma, bollingerBand } from "react-stockcharts/lib/indicator";
-import { fitWidth } from "react-stockcharts/lib/helper";
-import { timeFormat } from "d3-time-format";
+
+import {
+  ChartCanvas,
+  Chart,
+  BarSeries,
+  CandlestickSeries,
+  LineSeries,
+  MovingAverageTooltip,
+  OHLCTooltip,
+  XAxis,
+  YAxis,
+  MouseCoordinateX,
+  MouseCoordinateY,
+  CrossHairCursor,
+  withSize,
+  withDeviceRatio,
+  BollingerSeries,
+} from "react-financial-charts";
 import { format } from "d3-format";
+import { timeFormat } from "d3-time-format";
+
+import socket from "../../../utils/socket";
+import useResizeCanvas from "../../../hooks/useResizeCanvas";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import { setKlineData } from "../../../store/binanceData";
-import socket from "../../../utils/socket";
+import { bollingerBand } from "react-financial-charts";
+import { ema } from "react-financial-charts";
+import { discontinuousTimeScaleProviderBuilder } from "react-financial-charts";
+import BuySellAnnotations from "./BuySellAnnotations";
 
-const RealTimePriceChart = ({ width, ratio }: { width: number; ratio: number }) => {
+// 使用 React.forwardRef 包裹组件
+const D3Klines: React.FC = () => {
   const dispatch = useDispatch();
+  // const { containerRef, canvasSize } = useResizeCanvas(10, 24, 48);
   const klineData = useSelector((state: RootState) => state.binanceData.klineData);
-
+  // 确保数据格式符合 react-stockcharts 的要求
+  const formattedData = useMemo(() => {
+    return klineData.map((item) => ({
+      date: new Date(item.openTime),
+      open: parseFloat(item.openPrice),
+      high: parseFloat(item.highPrice),
+      low: parseFloat(item.lowPrice),
+      close: parseFloat(item.closePrice),
+      volume: parseFloat(item.volume),
+      bollingerBand: {
+        top: item.bollingerBand?.upperBand,
+        middle: item.bollingerBand?.middleBand,
+        bottom: item.bollingerBand?.lowerBand,
+      },
+    }));
+  }, [klineData]);
   useEffect(() => {
     socket.on("klineUpdate", (data) => {
       dispatch(setKlineData(data));
@@ -29,50 +61,61 @@ const RealTimePriceChart = ({ width, ratio }: { width: number; ratio: number }) 
     };
   }, [dispatch]);
 
-  const ema20 = ema()
-    .options({ windowSize: 20 })
-    .merge((d: { ema20: any }, c: any) => {
-      d.ema20 = c;
-    })
-    .accessor((d: { ema20: any }) => d.ema20)
-    .stroke("blue");
+  const ema12 = useMemo(() => {
+    return ema()
+      .id(1)
+      .options({ windowSize: 12 })
+      .merge((d: any, c: any) => {
+        d.ema12 = c;
+      })
+      .accessor((d: any) => d.ema12);
+  }, []);
 
-  const sma20 = sma()
-    .options({ windowSize: 20 })
-    .merge((d: { sma20: any }, c: any) => {
-      d.sma20 = c;
-    })
-    .accessor((d: { sma20: any }) => d.sma20);
+  const ema26 = useMemo(() => {
+    return ema()
+      .id(2)
+      .options({ windowSize: 26 })
+      .merge((d: any, c: any) => {
+        d.ema26 = c;
+      })
+      .accessor((d: any) => d.ema26);
+  }, []);
 
-  const ema50 = ema()
-    .options({ windowSize: 50 })
-    .merge((d: { ema50: any }, c: any) => {
-      d.ema50 = c;
-    })
-    .accessor((d: { ema50: any }) => d.ema50);
+  const bb = useMemo(() => {
+    return bollingerBand()
+      .merge((d: any, c: any) => {
+        d.bb = c;
+      })
+      .accessor((d: any) => d.bb);
+  }, []);
 
-  const bb = bollingerBand()
-    .options({ windowSize: 20, sourcePath: "close" })
-    .merge((d: { bb: any }, c: any) => {
-      d.bb = c;
-    })
-    .accessor((d: { bb: any }) => d.bb);
+  // 计算技术指标数据
+  const calculatedData = useMemo(() => {
+    return bb(ema26(ema12(formattedData)));
+  }, [bb, ema12, ema26, formattedData]);
 
-  const calculatedData = ema20(sma20(ema50(bb(klineData))));
-  const xScaleProvider = discontinuousTimeScaleProvider.inputDateAccessor((d: { date: string | number | Date }) => new Date(d.date));
-  const { data, xScale, xAccessor, displayXAccessor } = xScaleProvider(calculatedData);
+  const xScaleProvider = useMemo(() => {
+    return discontinuousTimeScaleProviderBuilder().inputDateAccessor((d: any) => d.date);
+  }, []);
 
-  const start = xAccessor(data[data.length - 1]);
-  const end = xAccessor(data[Math.max(0, data.length - 150)]);
-  const xExtents = [start, end];
-
+  const { data, xScale, xAccessor, displayXAccessor } = useMemo(() => {
+    return xScaleProvider(calculatedData);
+  }, [calculatedData]);
+  const xExtents = useMemo(() => {
+    const start = xAccessor(data[data.length - 1]);
+    const end = xAccessor(data[Math.max(0, data.length - 150)]);
+    return [start, end];
+  }, [data, xAccessor]);
+  const xOffset = 0;
+  const height = 400;
+  const width = 1250;
   return (
-    <Card title="实时价格走势图" style={{ height: "100%" }}>
+    <Card title="实时价格走势图" style={{ height: "100%" }} className="kline-card">
       <ChartCanvas
-        height={500}
+        height={height}
         width={width}
-        ratio={ratio}
-        margin={{ left: 70, right: 70, top: 10, bottom: 30 }}
+        ratio={1}
+        margin={{ left: 10, right: 50, top: 10, bottom: 30 }}
         seriesName="Data"
         data={data}
         xScale={xScale}
@@ -80,33 +123,21 @@ const RealTimePriceChart = ({ width, ratio }: { width: number; ratio: number }) 
         displayXAccessor={displayXAccessor}
         xExtents={xExtents}
       >
-        <Chart id={1} yExtents={(d: { high: any; low: any; bb: { top: any } }) => [d.high, d.low, d.bb && d.bb.top]}>
-          <XAxis axisAt="bottom" orient="bottom" />
-          <YAxis axisAt="right" orient="right" ticks={5} />
-
-          <MouseCoordinateX at="bottom" orient="bottom" displayFormat={timeFormat("%Y-%m-%d")} />
-          <MouseCoordinateY at="right" orient="right" displayFormat={format(".2f")} />
-
+        <Chart id={1} yExtents={(d: any) => [d.high, d.low, d.bb && d.bb.top]} height={height * (2 / 3)} origin={(w: any, h: number) => [xOffset, 0]}>
+          <YAxis showGridLines ticks={6} />
           <CandlestickSeries />
-          <BollingerSeries yAccessor={bb.accessor()} />
-          <LineSeries yAccessor={sma20.accessor()} stroke={sma20.stroke()} />
-          <LineSeries yAccessor={ema20.accessor()} stroke={ema20.stroke()} />
-          <LineSeries yAccessor={ema50.accessor()} stroke={ema50.stroke()} />
-
-          <OHLCTooltip origin={[-40, 0]} />
-          <MovingAverageTooltip
-            origin={[-38, 15]}
-            options={[
-              { yAccessor: sma20.accessor(), type: "SMA", stroke: sma20.stroke(), windowSize: 20 },
-              { yAccessor: ema20.accessor(), type: "EMA", stroke: ema20.stroke(), windowSize: 20 },
-              { yAccessor: ema50.accessor(), type: "EMA", stroke: ema50.stroke(), windowSize: 50 },
-            ]}
-          />
-          <BollingerBandTooltip origin={[-38, 60]} yAccessor={bb.accessor()} />
+          <BollingerSeries yAccessor={(d: any) => d.bollingerBand} />
+          <LineSeries yAccessor={ema12.accessor()} strokeStyle={ema12.stroke()} />
+          <LineSeries yAccessor={ema26.accessor()} strokeStyle={ema26.stroke()} />
+          <MouseCoordinateX displayFormat={timeFormat("%Y-%m-%d")} />
+          <MouseCoordinateY displayFormat={format(".2f")} />
+          <OHLCTooltip origin={[10, 10]} />
+          {/* <BuySellAnnotations plotData={data} xAccessor={xAccessor} xScale={xScale} /> */}
         </Chart>
-        <Chart id={2} yExtents={(d: { volume: any }) => d.volume}>
-          <YAxis axisAt="left" orient="left" ticks={5} tickFormat={format(".2s")} />
-          <BarSeries yAccessor={(d: { volume: any }) => d.volume} fill={(d: { close: number; open: number }) => (d.close > d.open ? "#26a69a" : "#ef5350")} />
+        <Chart id={2} yExtents={(d: any) => d.volume} height={height * (0.8 / 3)} origin={(w: any, h: number) => [xOffset, 400 * (2 / 3)]}>
+          <BarSeries yAccessor={(d: any) => d.volume} />
+          <YAxis innerTickSize={0.1} ticks={6} />
+          <XAxis showGridLines ticks={10} showDomain />
         </Chart>
         <CrossHairCursor />
       </ChartCanvas>
@@ -114,9 +145,4 @@ const RealTimePriceChart = ({ width, ratio }: { width: number; ratio: number }) 
   );
 };
 
-RealTimePriceChart.propTypes = {
-  width: PropTypes.number.isRequired,
-  ratio: PropTypes.number.isRequired,
-};
-
-export default fitWidth(RealTimePriceChart);
+export default D3Klines;

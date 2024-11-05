@@ -3,7 +3,7 @@ import { Card, Col, Row, Statistic, Typography } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store";
 import socket from "../../../utils/socket";
-import { updateInitialFunds, updatePositionRisk } from "../../../store/binanceData";
+import { updateInitialFunds, updatePositionRisk, updateTotalFees } from "../../../store/binanceData";
 import { PositionRisk } from "../../../types/types";
 
 const { Title, Text } = Typography;
@@ -16,6 +16,7 @@ function formatDateToUTC3(date: Date) {
 const DailyProfitAndReturnCard: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const initialFunds = useSelector((state: RootState) => state.binanceData?.initialFunds ?? 0);
+  const totalFees = useSelector((state: RootState) => state.binanceData?.totalFees ?? 0);
   const positionRisk = useSelector((state: RootState) => state.binanceData?.positionRisk ?? {});
   const dailyReturnRate = useSelector((state: RootState) => {
     const accountBalance = state.binanceData?.accountBalance;
@@ -35,21 +36,31 @@ const DailyProfitAndReturnCard: React.FC = () => {
     }
     return 0;
   });
+  const totalOpenPositionTimes = useSelector((state: RootState) => {
+    let yesterday = new Date().setHours(5, 0, 0, 0)
+    if (new Date().getHours() < 5) {
+      yesterday = new Date(new Date().setDate(new Date().getDate() - 1)).setHours(5, 0, 0, 0)
+    }
+    const orders = state.binanceData?.orders?.filter(order => Number(order.updateTime) >= yesterday && order.type === "OPEN")
+    return orders.length
+  })
 
   // 模拟数据，显示持仓保证金、浮动盈亏、持仓时间、今日总手续费
   const floatingPL = 200; // 示例值
-  const positionTime = "3h 45m"; // 示例值
-  const totalFees = 50; // 示例值
 
   useEffect(() => {
     socket.on("updateInitialFunds", (data: number) => {
       dispatch(updateInitialFunds(data));
+    });
+    socket.on("updateTotalFees", (data: number) => {
+      dispatch(updateTotalFees(data));
     });
     socket.on("updatePositionRisk", (data: PositionRisk) => {
       dispatch(updatePositionRisk(data));
     });
     return () => {
       socket.off("updateInitialFunds", updateInitialFunds);
+      socket.off("updateTotalFees", updateTotalFees);
       socket.off("updatePositionRisk", updatePositionRisk);
     };
   }, [dispatch]);
@@ -94,11 +105,24 @@ const DailyProfitAndReturnCard: React.FC = () => {
         </Col>
       </Row>
       <Row gutter={16} style={{ marginTop: "16px" }}>
-        <Col span={12}>
-          <Statistic title="手续费" value={totalFees} precision={2} suffix="USDT" />
+        <Col span={6}>
+          <Statistic title="手续费" value={totalFees} precision={6} suffix="USDT" />
+        </Col>
+        <Col span={6}>
+          <Statistic title="日开仓次数" value={totalOpenPositionTimes} precision={0} />
         </Col>
         <Col span={12}>
-          <Statistic title="持仓时间" value={positionTime} />
+          <Statistic
+            title="持仓时间"
+            value={
+              positionRisk.updateTime > 0
+                ? Math.floor((Date.now() - positionRisk.updateTime) / (1000 * 60 * 60)) +
+                  "小时 " +
+                  Math.floor(((Date.now() - positionRisk.updateTime) % (1000 * 60 * 60)) / (1000 * 60)) +
+                  "分钟"
+                : 0
+            }
+          />
         </Col>
       </Row>
     </Card>

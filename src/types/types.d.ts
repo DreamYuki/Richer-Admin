@@ -43,6 +43,7 @@ export interface Balance {
 
 export interface BinanceDataState {
   initialFunds: number;
+  totalFees: number;
   accountBalance: Balance[];
   positionRisk: PositionRisk;
   klineData: KlineDataObj[];

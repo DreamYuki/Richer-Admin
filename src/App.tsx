@@ -11,6 +11,11 @@ import { CryptoSideMenu, EquitiesSideMenu, FuturesSideMenu, OptionsSideMenu } fr
 
 const { Header, Sider, Content } = Layout;
 
+// 每小时刷新页面并清空内存
+setInterval(() => {
+  console.log("Refreshing the page to clear memory...");
+  window.location.reload(); // 强制从服务器重新加载页面以清空内存
+}, 3600000);
 const App = () => {
   const [selectedMarket, setSelectedMarket] = useState("crypto");
   const [collapsed, setCollapsed] = useState(false); // 用于控制侧边栏的折叠状态

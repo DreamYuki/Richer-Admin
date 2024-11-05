@@ -12,3 +12,7 @@
   font-size: 16px;
   cursor: pointer;
 }
+
+.kline-card .ant-card-body {
+  padding-right: 0%;
+}

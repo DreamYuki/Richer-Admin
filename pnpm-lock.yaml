@@ -41,6 +41,9 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      react-financial-charts:
+        specifier: ^2.0.1
+        version: 2.0.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-redux:
         specifier: ^7.2.4
         version: 7.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -902,6 +905,66 @@ packages:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
 
+  '@react-financial-charts/annotations@2.0.0':
+    resolution: {integrity: sha512-pnpZa2+h5p3mQ5vR5Z36LgVT0UaWe0V5JfvLdLa97NIBKsLZwzJNP//KXK5T3cdK2RmgHFNbEegpSxYgk4hLYw==, tarball: https://registry.npmmirror.com/@react-financial-charts/annotations/-/annotations-2.0.0.tgz}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+
+  '@react-financial-charts/axes@2.0.0':
+    resolution: {integrity: sha512-VbkKsL+Hp92YpJmC5sDYq9D7z8CIjOtzNGdS+cuSALkU0NHD7XLhzO4GxiSUMMzrp99ecnBOv+2vdgNqEROYtg==, tarball: https://registry.npmmirror.com/@react-financial-charts/axes/-/axes-2.0.0.tgz}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+
+  '@react-financial-charts/coordinates@2.0.0':
+    resolution: {integrity: sha512-sC9sIrfFJ0GDmOXjZd5TBOToDS6FZKZtbZ0ZabNQzlIullHYRZrkZ4tyHl+Wsji7AmeVQjeE0LlAd1spqSVYEg==, tarball: https://registry.npmmirror.com/@react-financial-charts/coordinates/-/coordinates-2.0.0.tgz}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+
+  '@react-financial-charts/core@2.0.0':
+    resolution: {integrity: sha512-WduXh6Vf1N6qgbTl+U4MYBVuvk7MN8yaVB1aOy6FVFXqaZfQUaNIwk/s5LadgSIPjzK7g3NOdBG4StR9RFzy7w==, tarball: https://registry.npmmirror.com/@react-financial-charts/core/-/core-2.0.0.tgz}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+
+  '@react-financial-charts/indicators@2.0.0':
+    resolution: {integrity: sha512-6DU3EaA+11twkSrN/wZ9wDEquvKLTaELt4qJ3M8YIX8wWnKyOFWlyzGjmn77hEa7iRv1VuVFNITEviWzy2Nq+A==, tarball: https://registry.npmmirror.com/@react-financial-charts/indicators/-/indicators-2.0.0.tgz}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+
+  '@react-financial-charts/interactive@2.0.0':
+    resolution: {integrity: sha512-wZHEqUGNHpsrBpidk49pY0sXtAhYi2gQVWUW7xJbgVP1iE+Jpwtodbl6EOf16MGx3sQJuL1qwJvn2wwFObgl1g==, tarball: https://registry.npmmirror.com/@react-financial-charts/interactive/-/interactive-2.0.0.tgz}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+
+  '@react-financial-charts/scales@2.0.0':
+    resolution: {integrity: sha512-8lFXl/mWZ36LsNVHEtTUSURycceNxCWUeU8zY8SsssjQK7FaFPO29KIff+UVYdnlH5QVHVfaUHI/NNWn5wkPIA==, tarball: https://registry.npmmirror.com/@react-financial-charts/scales/-/scales-2.0.0.tgz}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+
+  '@react-financial-charts/series@2.0.0':
+    resolution: {integrity: sha512-hVQEjzKaSLRcPLX8vibtOZa776wbZ3cWYrUtVZ9eYZ7ROHJ2pZslE4GwFV7o74Hjdet7a5AmCwASm3NkeXsFaQ==, tarball: https://registry.npmmirror.com/@react-financial-charts/series/-/series-2.0.0.tgz}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+
+  '@react-financial-charts/tooltip@2.0.0':
+    resolution: {integrity: sha512-EEAveu07nafgWVdZK7SNHAwqKVoKLKEjZBq7obhOGdnQ+1CSnQlyO+r6ISyabQt/XBpnASVCwqlK2NHewdoWxA==, tarball: https://registry.npmmirror.com/@react-financial-charts/tooltip/-/tooltip-2.0.0.tgz}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+
+  '@react-financial-charts/utils@2.0.1':
+    resolution: {integrity: sha512-oUyfiURZ4bwTl+9794/BE+oAyK+7MkclOoL3rMQl4NtAY5Xb4NHAGCwK2Zh82gf0f2/68Rl4rho4lpFCDsFYmg==, tarball: https://registry.npmmirror.com/@react-financial-charts/utils/-/utils-2.0.1.tgz}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+
   '@reduxjs/toolkit@2.3.0':
     resolution: {integrity: sha512-WC7Yd6cNGfHx8zf+iu+Q1UPTfEcXhQ+ATi7CV1hlrSAaQBdlPzg7Ww/wJHNQem7qG9rxmWoFCDCPubSvFObGzA==, tarball: https://registry.npmmirror.com/@reduxjs/toolkit/-/toolkit-2.3.0.tgz}
     peerDependencies:
@@ -935,8 +998,14 @@ packages:
   '@types/d3-format@3.0.4':
     resolution: {integrity: sha512-fALi2aI6shfg7vM5KiR1wNJnZ7r6UuggVqtDA+xiEdPZQwy/trcQaHnwShLuLdta2rTymCNpxYTiMZX/e09F4g==, tarball: https://registry.npmmirror.com/@types/d3-format/-/d3-format-3.0.4.tgz}
 
+  '@types/d3-scale@3.3.5':
+    resolution: {integrity: sha512-YOpKj0kIEusRf7ofeJcSZQsvKbnTwpe1DUF+P2qsotqG53kEsjm7EzzliqQxMkAWdkZcHrg5rRhB4JiDOQPX+A==, tarball: https://registry.npmmirror.com/@types/d3-scale/-/d3-scale-3.3.5.tgz}
+
   '@types/d3-time-format@4.0.3':
     resolution: {integrity: sha512-5xg9rC+wWL8kdDj153qZcsJ0FWiFt0J5RB6LYUNZjwSnesfblqrI/bJ1wBdJ8OQfncgbJG5+2F+qfqnqyzYxyg==, tarball: https://registry.npmmirror.com/@types/d3-time-format/-/d3-time-format-4.0.3.tgz}
+
+  '@types/d3-time@2.1.4':
+    resolution: {integrity: sha512-BTfLsxTeo7yFxI/haOOf1ZwJ6xKgQLT9dCp+EcmQv87Gox6X+oKl4mLKfO6fnWm3P22+A6DknMNEZany8ql2Rw==, tarball: https://registry.npmmirror.com/@types/d3-time/-/d3-time-2.1.4.tgz}
 
   '@types/eslint-scope@3.7.7':
     resolution: {integrity: sha512-MzMFlSLBqNF2gcHWO0G1vP/YQyfvrxZ0bF+u7mzUdZ1/xK4A4sru+nraZz5i3iEIk1l1uyicaDVTB4QbbEkAYg==, tarball: https://registry.npmmirror.com/@types/eslint-scope/-/eslint-scope-3.7.7.tgz}
@@ -1411,6 +1480,9 @@ packages:
   d3-array@1.2.4:
     resolution: {integrity: sha512-KHW6M86R+FUPYGb3R5XiYjXPq7VzwxZ22buHhAEVG5ztoEcZZMLov530mmccaqA1GghZArjQV46fuc8kUqhhHw==, tarball: https://registry.npmmirror.com/d3-array/-/d3-array-1.2.4.tgz}
 
+  d3-array@2.12.1:
+    resolution: {integrity: sha512-B0ErZK/66mHtEsR1TkPEEkwdy+WDesimkM5gpZr5Dsg54BiTA5RXtYW5qTLIAcekaS9xfZrzBLF/OAkB3Qn1YQ==, tarball: https://registry.npmmirror.com/d3-array/-/d3-array-2.12.1.tgz}
+
   d3-array@3.2.4:
     resolution: {integrity: sha512-tdQAmyA18i4J7wprpYq8ClcxZy3SC31QMeByyCFyRt7BVHdREQZ5lpzoe5mFEYZUWe+oq8HBvk9JjpibyEV4Jg==, tarball: https://registry.npmmirror.com/d3-array/-/d3-array-3.2.4.tgz}
     engines: {node: '>=12'}
@@ -1472,12 +1544,18 @@ packages:
   d3-force@1.2.1:
     resolution: {integrity: sha512-HHvehyaiUlVo5CxBJ0yF/xny4xoaxFxDnBXNvNcfW9adORGZfyNF1dj6DGLKyk4Yh3brP/1h3rnDzdIAwL08zg==, tarball: https://registry.npmmirror.com/d3-force/-/d3-force-1.2.1.tgz}
 
+  d3-force@2.1.1:
+    resolution: {integrity: sha512-nAuHEzBqMvpFVMf9OX75d00OxvOXdxY+xECIXjW6Gv8BRrXu6gAWbv/9XKrvfJ5i5DCokDW7RYE50LRoK092ew==, tarball: https://registry.npmmirror.com/d3-force/-/d3-force-2.1.1.tgz}
+
   d3-force@3.0.0:
     resolution: {integrity: sha512-zxV/SsA+U4yte8051P4ECydjD/S+qeYtnaIyAs9tgHCqfguma/aAQDjo85A9Z6EKhBirHRJHXIgJUlffT4wdLg==, tarball: https://registry.npmmirror.com/d3-force/-/d3-force-3.0.0.tgz}
     engines: {node: '>=12'}
 
   d3-format@1.4.5:
     resolution: {integrity: sha512-J0piedu6Z8iB6TbIGfZgDzfXxUFN3qQRMofy2oPdXzQibYGqPB/9iMcxr/TGalU+2RsyDO+U4f33id8tbnSRMQ==, tarball: https://registry.npmmirror.com/d3-format/-/d3-format-1.4.5.tgz}
+
+  d3-format@2.0.0:
+    resolution: {integrity: sha512-Ab3S6XuE/Q+flY96HXT0jOXcM4EAClYFnRGY5zsjRGNy6qCYrQsMffs7cV5Q9xejb35zxW5hf/guKw34kvIKsA==, tarball: https://registry.npmmirror.com/d3-format/-/d3-format-2.0.0.tgz}
 
   d3-format@3.1.0:
     resolution: {integrity: sha512-YyUI6AEuY/Wpt8KWLgZHsIU86atmikuoOmCfommt0LYHiQSPjvX2AcFc38PX0CBpr2RCyZhjex+NS/LPOv6YqA==, tarball: https://registry.npmmirror.com/d3-format/-/d3-format-3.1.0.tgz}
@@ -1494,12 +1572,18 @@ packages:
   d3-interpolate@1.4.0:
     resolution: {integrity: sha512-V9znK0zc3jOPV4VD2zZn0sDhZU3WAE2bmlxdIwwQPPzPjvyLkd8B3JUVdS1IDUFDkWZ72c9qnv1GK2ZagTZ8EA==, tarball: https://registry.npmmirror.com/d3-interpolate/-/d3-interpolate-1.4.0.tgz}
 
+  d3-interpolate@2.0.1:
+    resolution: {integrity: sha512-c5UhwwTs/yybcmTpAVqwSFl6vrQ8JZJoT5F7xNFK9pymv5C0Ymcc9/LIJHtYIggg/yS9YHw8i8O8tgb9pupjeQ==, tarball: https://registry.npmmirror.com/d3-interpolate/-/d3-interpolate-2.0.1.tgz}
+
   d3-interpolate@3.0.1:
     resolution: {integrity: sha512-3bYs1rOD33uo8aqJfKP3JWPAibgw8Zm2+L9vBKEHJ2Rg+viTR7o5Mmv5mZcieN+FRYaAOWX5SJATX6k1PWz72g==, tarball: https://registry.npmmirror.com/d3-interpolate/-/d3-interpolate-3.0.1.tgz}
     engines: {node: '>=12'}
 
   d3-path@1.0.9:
     resolution: {integrity: sha512-VLaYcn81dtHVTjEHd8B+pbe9yHWpXKZUC87PzoFmsFrJqgFwDe/qxfp5MlfsfM1V5E/iVt0MmEbWQ7FVIXh/bg==, tarball: https://registry.npmmirror.com/d3-path/-/d3-path-1.0.9.tgz}
+
+  d3-path@2.0.0:
+    resolution: {integrity: sha512-ZwZQxKhBnv9yHaiWd6ZU4x5BtCQ7pXszEV9CU6kRgwIQVQGLMv1oiL4M+MK/n79sYzsj+gcgpPQSctJUsLN7fA==, tarball: https://registry.npmmirror.com/d3-path/-/d3-path-2.0.0.tgz}
 
   d3-path@3.1.0:
     resolution: {integrity: sha512-p3KP5HCf/bvjBSSKuXid6Zqijx7wIfNW+J/maPs+iwR35at5JCbLUT0LzF1cnjbCHWhqzQTIN2Jpe8pRebIEFQ==, tarball: https://registry.npmmirror.com/d3-path/-/d3-path-3.1.0.tgz}
@@ -1527,12 +1611,18 @@ packages:
   d3-scale@1.0.7:
     resolution: {integrity: sha512-KvU92czp2/qse5tUfGms6Kjig0AhHOwkzXG0+PqIJB3ke0WUv088AHMZI0OssO9NCkXt4RP8yju9rpH8aGB7Lw==, tarball: https://registry.npmmirror.com/d3-scale/-/d3-scale-1.0.7.tgz}
 
+  d3-scale@3.3.0:
+    resolution: {integrity: sha512-1JGp44NQCt5d1g+Yy+GeOnZP7xHo0ii8zsQp6PGzd+C1/dl0KGsp9A7Mxwp+1D1o4unbTTxVdU/ZOIEBoeZPbQ==, tarball: https://registry.npmmirror.com/d3-scale/-/d3-scale-3.3.0.tgz}
+
   d3-scale@4.0.2:
     resolution: {integrity: sha512-GZW464g1SH7ag3Y7hXjf8RoUuAFIqklOAq3MRl4OaWabTFJY9PN/E1YklhXLh+OQ3fM9yS2nOkCoS+WLZ6kvxQ==, tarball: https://registry.npmmirror.com/d3-scale/-/d3-scale-4.0.2.tgz}
     engines: {node: '>=12'}
 
   d3-selection@1.4.2:
     resolution: {integrity: sha512-SJ0BqYihzOjDnnlfyeHT0e30k0K1+5sR3d5fNueCNeuhZTnGw4M4o8mqJchSwgKMXCNFo+e2VTChiSJ0vYtXkg==, tarball: https://registry.npmmirror.com/d3-selection/-/d3-selection-1.4.2.tgz}
+
+  d3-selection@2.0.0:
+    resolution: {integrity: sha512-XoGGqhLUN/W14NmaqcO/bb1nqjDAw5WtSYb2X8wiuQWvSZUsUVYsOSkOybUrNvcBjaywBdYPy03eXHMXjk9nZA==, tarball: https://registry.npmmirror.com/d3-selection/-/d3-selection-2.0.0.tgz}
 
   d3-selection@3.0.0:
     resolution: {integrity: sha512-fmTRWbNMmsmWq6xJV8D19U/gw/bwrHfNXxrIN+HfZgnzqTHp9jOmKMhsTUjXOJnZOdZY9Q28y4yebKzqDKlxlQ==, tarball: https://registry.npmmirror.com/d3-selection/-/d3-selection-3.0.0.tgz}
@@ -1541,6 +1631,9 @@ packages:
   d3-shape@1.3.7:
     resolution: {integrity: sha512-EUkvKjqPFUAZyOlhY5gzCxCeI0Aep04LwIRpsZ/mLFelJiUfnK56jo5JMDSE7yyP2kLSb6LtF+S5chMk7uqPqw==, tarball: https://registry.npmmirror.com/d3-shape/-/d3-shape-1.3.7.tgz}
 
+  d3-shape@2.1.0:
+    resolution: {integrity: sha512-PnjUqfM2PpskbSLTJvAzp2Wv4CZsnAgTfcVRTwW03QR3MkXF8Uo7B1y/lWkAsmbKwuecto++4NlsYcvYpXpTHA==, tarball: https://registry.npmmirror.com/d3-shape/-/d3-shape-2.1.0.tgz}
+
   d3-shape@3.2.0:
     resolution: {integrity: sha512-SaLBuwGm3MOViRq2ABk3eLoxwZELpH6zhl3FbAoJ7Vm1gofKx6El1Ib5z23NUEhF9AsGl7y+dzLe5Cw2AArGTA==, tarball: https://registry.npmmirror.com/d3-shape/-/d3-shape-3.2.0.tgz}
     engines: {node: '>=12'}
@@ -1548,12 +1641,18 @@ packages:
   d3-time-format@2.3.0:
     resolution: {integrity: sha512-guv6b2H37s2Uq/GefleCDtbe0XZAuy7Wa49VGkPVPMfLL9qObgBST3lEHJBMUp8S7NdLQAGIvr2KXk8Hc98iKQ==, tarball: https://registry.npmmirror.com/d3-time-format/-/d3-time-format-2.3.0.tgz}
 
+  d3-time-format@3.0.0:
+    resolution: {integrity: sha512-UXJh6EKsHBTjopVqZBhFysQcoXSv/5yLONZvkQ5Kk3qbwiUYkdX17Xa1PT6U1ZWXGGfB1ey5L8dKMlFq2DO0Ag==, tarball: https://registry.npmmirror.com/d3-time-format/-/d3-time-format-3.0.0.tgz}
+
   d3-time-format@4.1.0:
     resolution: {integrity: sha512-dJxPBlzC7NugB2PDLwo9Q8JiTR3M3e4/XANkreKSUxF8vvXKqm1Yfq4Q5dl8budlunRVlUUaDUgFt7eA8D6NLg==, tarball: https://registry.npmmirror.com/d3-time-format/-/d3-time-format-4.1.0.tgz}
     engines: {node: '>=12'}
 
   d3-time@1.1.0:
     resolution: {integrity: sha512-Xh0isrZ5rPYYdqhAVk8VLnMEidhz5aP7htAADH6MfzgmmicPkTo8LhkLxci61/lCB7n7UmE3bN0leRt+qvkLxA==, tarball: https://registry.npmmirror.com/d3-time/-/d3-time-1.1.0.tgz}
+
+  d3-time@2.1.1:
+    resolution: {integrity: sha512-/eIQe/eR4kCQwq7yxi7z4c6qEXf2IYGcjoWB5OOQy4Tq9Uv39/947qlDcN2TLkiTzQWzvnsuYPB9TrWaNfipKQ==, tarball: https://registry.npmmirror.com/d3-time/-/d3-time-2.1.1.tgz}
 
   d3-time@3.1.0:
     resolution: {integrity: sha512-VqKjzBLejbSMT4IgbmVgDjpkYrNWUYJnbCGo874u7MMKIWsILRX+OpX/gTk8MqjpT1A/c6HY2dCA77ZN0lkQ2Q==, tarball: https://registry.npmmirror.com/d3-time/-/d3-time-3.1.0.tgz}
@@ -2082,6 +2181,9 @@ packages:
   internal-slot@1.0.7:
     resolution: {integrity: sha512-NGnrKwXzSms2qUUih/ILZ5JBqNTSa1+ZmP6flaIp6KmSElgE9qdndzS3cqjrDovwFdmwsGsLdeFgB6suw+1e9g==, tarball: https://registry.npmmirror.com/internal-slot/-/internal-slot-1.0.7.tgz}
     engines: {node: '>= 0.4'}
+
+  internmap@1.0.1:
+    resolution: {integrity: sha512-lDB5YccMydFBtasVtxnZ3MRBHuaoE8GKsppq+EchKL2U4nK/DmEpPHNH8MZe5HkMtpSiTSOZwfN0tzYjO/lJEw==, tarball: https://registry.npmmirror.com/internmap/-/internmap-1.0.1.tgz}
 
   internmap@2.0.3:
     resolution: {integrity: sha512-5Hh7Y1wQbvY5ooGgPbDaL5iYLAPzMTUrjMulskHLH6wnv/A+1q5rgEaiuqEjB+oxGXIVZs1FF+R/KPN3ZSQYYg==, tarball: https://registry.npmmirror.com/internmap/-/internmap-2.0.3.tgz}
@@ -2866,6 +2968,12 @@ packages:
     peerDependencies:
       react: ^18.3.1
 
+  react-financial-charts@2.0.1:
+    resolution: {integrity: sha512-KpPns2e+Dp90JcavkshhTXBAmw4mAmQunCU5V1QsWFNSIWIubmcigf3BvWxBJBrw9R6gpA91L9fUQsSAjDV3Bg==, tarball: https://registry.npmmirror.com/react-financial-charts/-/react-financial-charts-2.0.1.tgz}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==, tarball: https://registry.npmmirror.com/react-is/-/react-is-16.13.1.tgz}
 
@@ -2905,6 +3013,12 @@ packages:
     peerDependencies:
       react: ^15.0.0 || ^16.0.0
       react-dom: ^15.0.0 || ^16.0.0
+
+  react-virtualized-auto-sizer@1.0.24:
+    resolution: {integrity: sha512-3kCn7N9NEb3FlvJrSHWGQ4iVl+ydQObq2fHMn12i5wbtm74zHOPhz/i64OL3c1S1vi9i2GXtZqNqUJTQ+BnNfg==, tarball: https://registry.npmmirror.com/react-virtualized-auto-sizer/-/react-virtualized-auto-sizer-1.0.24.tgz}
+    peerDependencies:
+      react: ^15.3.0 || ^16.0.0-alpha || ^17.0.0 || ^18.0.0
+      react-dom: ^15.3.0 || ^16.0.0-alpha || ^17.0.0 || ^18.0.0
 
   react@18.3.1:
     resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==, tarball: https://registry.npmmirror.com/react/-/react-18.3.1.tgz}
@@ -4641,6 +4755,93 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
+  '@react-financial-charts/annotations@2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@react-financial-charts/core': 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@types/d3-scale': 3.3.5
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+
+  '@react-financial-charts/axes@2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@react-financial-charts/core': 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@types/d3-scale': 3.3.5
+      d3-array: 2.12.1
+      d3-force: 2.1.1
+      d3-scale: 3.3.0
+      d3-selection: 2.0.0
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+
+  '@react-financial-charts/coordinates@2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@react-financial-charts/core': 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      d3-format: 2.0.0
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+
+  '@react-financial-charts/core@2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@types/d3-scale': 3.3.5
+      d3-array: 2.12.1
+      d3-scale: 3.3.0
+      d3-selection: 2.0.0
+      lodash.flattendeep: 4.4.0
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+
+  '@react-financial-charts/indicators@2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      d3-array: 2.12.1
+      d3-scale: 3.3.0
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+
+  '@react-financial-charts/interactive@2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@react-financial-charts/coordinates': 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@react-financial-charts/core': 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      d3-array: 2.12.1
+      d3-format: 2.0.0
+      d3-interpolate: 2.0.1
+      d3-path: 2.0.0
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+
+  '@react-financial-charts/scales@2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@react-financial-charts/core': 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      d3-array: 2.12.1
+      d3-scale: 3.3.0
+      d3-time-format: 3.0.0
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+
+  '@react-financial-charts/series@2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@react-financial-charts/core': 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@types/d3-scale': 3.3.5
+      d3-array: 2.12.1
+      d3-scale: 3.3.0
+      d3-shape: 2.1.0
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+
+  '@react-financial-charts/tooltip@2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@react-financial-charts/core': 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      d3-array: 2.12.1
+      d3-format: 2.0.0
+      d3-time-format: 3.0.0
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+
+  '@react-financial-charts/utils@2.0.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      react-virtualized-auto-sizer: 1.0.24(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+
   '@reduxjs/toolkit@2.3.0(react-redux@7.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
     dependencies:
       immer: 10.1.1
@@ -4675,7 +4876,13 @@ snapshots:
 
   '@types/d3-format@3.0.4': {}
 
+  '@types/d3-scale@3.3.5':
+    dependencies:
+      '@types/d3-time': 2.1.4
+
   '@types/d3-time-format@4.0.3': {}
+
+  '@types/d3-time@2.1.4': {}
 
   '@types/eslint-scope@3.7.7':
     dependencies:
@@ -5280,6 +5487,10 @@ snapshots:
 
   d3-array@1.2.4: {}
 
+  d3-array@2.12.1:
+    dependencies:
+      internmap: 1.0.1
+
   d3-array@3.2.4:
     dependencies:
       internmap: 2.0.3
@@ -5340,6 +5551,12 @@ snapshots:
       d3-quadtree: 1.0.7
       d3-timer: 1.0.10
 
+  d3-force@2.1.1:
+    dependencies:
+      d3-dispatch: 1.0.6
+      d3-quadtree: 1.0.7
+      d3-timer: 1.0.10
+
   d3-force@3.0.0:
     dependencies:
       d3-dispatch: 3.0.1
@@ -5347,6 +5564,8 @@ snapshots:
       d3-timer: 3.0.1
 
   d3-format@1.4.5: {}
+
+  d3-format@2.0.0: {}
 
   d3-format@3.1.0: {}
 
@@ -5360,11 +5579,17 @@ snapshots:
     dependencies:
       d3-color: 1.4.1
 
+  d3-interpolate@2.0.1:
+    dependencies:
+      d3-color: 1.4.1
+
   d3-interpolate@3.0.1:
     dependencies:
       d3-color: 3.1.0
 
   d3-path@1.0.9: {}
+
+  d3-path@2.0.0: {}
 
   d3-path@3.1.0: {}
 
@@ -5391,6 +5616,14 @@ snapshots:
       d3-time: 1.1.0
       d3-time-format: 2.3.0
 
+  d3-scale@3.3.0:
+    dependencies:
+      d3-array: 2.12.1
+      d3-format: 1.4.5
+      d3-interpolate: 1.4.0
+      d3-time: 2.1.1
+      d3-time-format: 2.3.0
+
   d3-scale@4.0.2:
     dependencies:
       d3-array: 3.2.4
@@ -5401,9 +5634,15 @@ snapshots:
 
   d3-selection@1.4.2: {}
 
+  d3-selection@2.0.0: {}
+
   d3-selection@3.0.0: {}
 
   d3-shape@1.3.7:
+    dependencies:
+      d3-path: 1.0.9
+
+  d3-shape@2.1.0:
     dependencies:
       d3-path: 1.0.9
 
@@ -5415,11 +5654,19 @@ snapshots:
     dependencies:
       d3-time: 1.1.0
 
+  d3-time-format@3.0.0:
+    dependencies:
+      d3-time: 1.1.0
+
   d3-time-format@4.1.0:
     dependencies:
       d3-time: 3.1.0
 
   d3-time@1.1.0: {}
+
+  d3-time@2.1.1:
+    dependencies:
+      d3-array: 2.12.1
 
   d3-time@3.1.0:
     dependencies:
@@ -6047,6 +6294,8 @@ snapshots:
       es-errors: 1.3.0
       hasown: 2.0.2
       side-channel: 1.0.6
+
+  internmap@1.0.1: {}
 
   internmap@2.0.3: {}
 
@@ -6857,6 +7106,21 @@ snapshots:
       react: 18.3.1
       scheduler: 0.23.2
 
+  react-financial-charts@2.0.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      '@react-financial-charts/annotations': 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@react-financial-charts/axes': 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@react-financial-charts/coordinates': 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@react-financial-charts/core': 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@react-financial-charts/indicators': 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@react-financial-charts/interactive': 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@react-financial-charts/scales': 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@react-financial-charts/series': 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@react-financial-charts/tooltip': 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@react-financial-charts/utils': 2.0.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+
   react-is@16.13.1: {}
 
   react-is@17.0.2: {}
@@ -6908,6 +7172,11 @@ snapshots:
       save-svg-as-png: 1.4.17
     transitivePeerDependencies:
       - supports-color
+
+  react-virtualized-auto-sizer@1.0.24(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
 
   react@18.3.1:
     dependencies:

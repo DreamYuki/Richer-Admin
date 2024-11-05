@@ -3,7 +3,7 @@ import { Row, Col } from "antd";
 import DailyFundsChart from "../components/DailyFundsChart";
 import DailyReturns from "../components/DailyReturns";
 import StrategyTable from "../components/StrategyTable";
-import RealTimePriceChart from "../components/RealTimePriceChart";
+import D3Klines from "../components/D3Klines";
 import DailyProfitAndReturnCard from "../components/DailyProfitAndReturnCard";
 import StabilityEvaluationCard from "../components/StabilityEvaluationCard";
 import RecentOrdersCard from "../components/RecentOrdersCard";
@@ -15,7 +15,7 @@ const CryptoMonitoringPage: React.FC = () => {
     <div style={{ padding: "20px" }}>
       <Row gutter={[16, 16]} style={{ height: "500px" }}>
         <Col span={14} style={{ height: "100%" }}>
-          <RealTimePriceChart style={{ height: "100%" }} />
+          <D3Klines />
         </Col>
         <Col span={10} style={{ height: "100%", display: "flex", flexDirection: "column", gap: "16px" }}>
           <div style={{ flex: "0 0 45%", overflow: "hidden" }}>

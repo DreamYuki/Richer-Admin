@@ -3,6 +3,7 @@ import { Balance, BinanceDataState, DailyReturnsData, KlineDataObj, Order, Posit
 
 const initialState: BinanceDataState = {
   initialFunds: 0,
+  totalFees: 0,
   accountBalance: [],
   positionRisk: {
     symbol: "",
@@ -20,7 +21,7 @@ const initialState: BinanceDataState = {
     positionSide: "LONG",
     notional: "",
     isolatedWallet: "",
-    updateTime: 0
+    updateTime: 0,
   },
   klineData: [],
   orders: [],
@@ -33,6 +34,9 @@ const binanceDataSlice = createSlice({
   reducers: {
     initialBalanceData: (state, action: PayloadAction<Balance[]>) => {
       state.accountBalance = action.payload;
+    },
+    updateTotalFees: (state, action: PayloadAction<number>) => {
+      state.totalFees = action.payload;
     },
     updateBalanceData: (state, action: PayloadAction<Balance>) => {
       state.accountBalance = [...state.accountBalance, action.payload];
@@ -65,6 +69,15 @@ const binanceDataSlice = createSlice({
   },
 });
 
-export const { initialBalanceData, updateBalanceData, updatePositionRisk, updateInitialFunds, updateKlineData, setKlineData, setOrders, setDailyReturns } =
-  binanceDataSlice.actions;
+export const {
+  initialBalanceData,
+  updateTotalFees,
+  updateBalanceData,
+  updatePositionRisk,
+  updateInitialFunds,
+  updateKlineData,
+  setKlineData,
+  setOrders,
+  setDailyReturns,
+} = binanceDataSlice.actions;
 export default binanceDataSlice.reducer;
