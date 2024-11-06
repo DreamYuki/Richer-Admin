@@ -9,8 +9,6 @@ import StabilityEvaluationCard from "../components/StabilityEvaluationCard";
 import RecentOrdersCard from "../components/RecentOrdersCard";
 
 const CryptoMonitoringPage: React.FC = () => {
-  // 日交易触发率、日命中率、总胜率、做空胜率、做多胜率、
-  // TODO 雷达图：各个策略胜率雷达图
   return (
     <div style={{ padding: "20px" }}>
       <Row gutter={[16, 16]} style={{ height: "500px" }}>

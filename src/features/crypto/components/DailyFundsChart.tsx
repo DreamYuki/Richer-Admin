@@ -31,7 +31,7 @@ const DailyFundsChart: React.FC<DailyFundsChartProps> = ({ style }) => {
   useEffect(() => {
     const throttledUpdateBalanceData = throttle((data: Balance) => {
       dispatch(updateBalanceData(data));
-    }, 1000); // 每秒最多更新一次
+    }, 5000); // 每秒最多更新一次
 
     socket.on("accountBalance", throttledUpdateBalanceData);
 

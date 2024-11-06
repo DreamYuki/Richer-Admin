@@ -13,10 +13,13 @@ import {
   YAxis,
   MouseCoordinateX,
   MouseCoordinateY,
-  CrossHairCursor,
   withSize,
   withDeviceRatio,
   BollingerSeries,
+  EdgeIndicator,
+  CrossHairCursor,
+  lastVisibleItemBasedZoomAnchor,
+  CurrentCoordinate,
 } from "react-financial-charts";
 import { format } from "d3-format";
 import { timeFormat } from "d3-time-format";
@@ -109,35 +112,57 @@ const D3Klines: React.FC = () => {
   const xOffset = 0;
   const height = 400;
   const width = 1250;
+  const openCloseColor = (data: { close: number; open: number }) => {
+    return data.close > data.open ? "#26a69a" : "#ef5350";
+  };
+  const pricesDisplayFormat = format(".0f");
+  const yEdgeIndicator = (data: { close: any }) => {
+    return data.close;
+  };
   return (
-    <Card title="实时价格走势图" style={{ height: "100%" }} className="kline-card">
+    <Card title="实时价格走势图" style={{ height: "100%", width: "100%" }} className="kline-card">
       <ChartCanvas
         height={height}
         width={width}
         ratio={1}
         margin={{ left: 10, right: 50, top: 10, bottom: 30 }}
-        seriesName="Data"
+        padding={{ left: 0, right: 50, top: 0, bottom: 0 }}
+        seriesName="BTCUSDT"
         data={data}
         xScale={xScale}
         xAccessor={xAccessor}
         displayXAccessor={displayXAccessor}
         xExtents={xExtents}
+        useCrossHairStyleCursor
+        maintainPointsPerPixelOnResize
+        mouseMoveEvent
+        zoomAnchor={lastVisibleItemBasedZoomAnchor}
       >
         <Chart id={1} yExtents={(d: any) => [d.high, d.low, d.bb && d.bb.top]} height={height * (2 / 3)} origin={(w: any, h: number) => [xOffset, 0]}>
-          <YAxis showGridLines ticks={6} />
+          <YAxis showGridLines ticks={8} tickFormat={pricesDisplayFormat} />
           <CandlestickSeries />
           <BollingerSeries yAccessor={(d: any) => d.bollingerBand} />
           <LineSeries yAccessor={ema12.accessor()} strokeStyle={ema12.stroke()} />
           <LineSeries yAccessor={ema26.accessor()} strokeStyle={ema26.stroke()} />
+          <CurrentCoordinate yAccessor={ema12.accessor()} fillStyle={ema12.stroke()} />
+          <CurrentCoordinate yAccessor={ema26.accessor()} fillStyle={ema26.stroke()} />
           <MouseCoordinateX displayFormat={timeFormat("%Y-%m-%d")} />
           <MouseCoordinateY displayFormat={format(".2f")} />
+          <EdgeIndicator
+            itemType="last"
+            rectWidth={55}
+            fill={openCloseColor}
+            lineStroke={openCloseColor}
+            displayFormat={pricesDisplayFormat}
+            yAccessor={yEdgeIndicator}
+          />
           <OHLCTooltip origin={[10, 10]} />
           {/* <BuySellAnnotations plotData={data} xAccessor={xAccessor} xScale={xScale} /> */}
         </Chart>
         <Chart id={2} yExtents={(d: any) => d.volume} height={height * (0.8 / 3)} origin={(w: any, h: number) => [xOffset, 400 * (2 / 3)]}>
           <BarSeries yAccessor={(d: any) => d.volume} />
-          <YAxis innerTickSize={0.1} ticks={6} />
-          <XAxis showGridLines ticks={10} showDomain />
+          <YAxis innerTickSize={0.1} ticks={5} showGridLines />
+          <XAxis ticks={10} showDomain />
         </Chart>
         <CrossHairCursor />
       </ChartCanvas>
